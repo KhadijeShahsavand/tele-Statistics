@@ -98,15 +98,16 @@ class ChatStatistics:
                 text_content += f"{' '.join(tokens)}"
         
         text_content = get_display(text_content)
-        #text_content = arabic_reshaper.reshape(text_content)
-
+        text_content = arabic_reshaper.reshape(text_content)
+        text_content = get_display(text_content)
+        
         logger.info(f"saving word cloud to {output_dir}")
         wordcloud=WordCloud(
         width=width,
         height=height,
         font_path=str(DATA_DIR / 'BHoma.ttf'),
-        max_font_size=200,
-        background_color='white'
+        max_font_size=max_font_size,
+        background_color=background_color
         ).generate(text_content)
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.axis("off")
